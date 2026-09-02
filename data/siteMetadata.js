@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'Ghi chép của Bảo Bùi',
   author: 'Bảo Bùi',
   headerTitle: 'Quá trình khám phá tri thức của Bảo Bùi',
-  description: 'Tôi tò mò về mọi thứ, tôi muốn học hỏi và chia sẻ những gì tôi biết',
+  description: 'Tôi tò mò vũ trụ được vận hành ra sao, tôi muốn học hỏi và chia sẻ những gì tôi biết',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://baobuivn-discovery.vercel.app/',
