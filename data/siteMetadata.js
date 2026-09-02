@@ -63,6 +63,7 @@ const siteMetadata = {
       categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
       mapping: 'pathname', // supported options: pathname, url, title
       reactions: '1', // Emoji reactions: 1 = enable / 0 = disable
+      inputPosition: 'top',
       // Send discussion metadata periodically to the parent window: 1 = enable / 0 = disable
       metadata: '0',
       // theme example: light, dark, dark_dimmed, dark_high_contrast
@@ -74,8 +75,8 @@ const siteMetadata = {
       // please provide a link below to your custom theme css file.
       // example: https://giscus.app/themes/custom_example.css
       themeURL: '',
-      // This corresponds to the `data-lang="en"` in giscus's configurations
-      lang: 'en',
+      // This corresponds to the `data-lang="vi"` in giscus's configurations
+      lang: 'vi',
     },
   },
   search: {
