@@ -101,6 +101,8 @@ export const Blog = defineDocumentType(() => ({
     title: { type: 'string', required: true },
     date: { type: 'date', required: true },
     order: { type: 'number', default: Number.MAX_SAFE_INTEGER },
+    series: { type: 'string' },
+    seriesOrder: { type: 'number' },
     tags: { type: 'list', of: { type: 'string' }, default: [] },
     lastmod: { type: 'date' },
     draft: { type: 'boolean' },
@@ -148,9 +150,22 @@ export const Authors = defineDocumentType(() => ({
   computedFields,
 }))
 
+export const Series = defineDocumentType(() => ({
+  name: 'Series',
+  filePathPattern: 'series/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    description: { type: 'string', required: true },
+    order: { type: 'number', default: Number.MAX_SAFE_INTEGER },
+    featured: { type: 'boolean', default: true },
+  },
+  computedFields,
+}))
+
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors],
+  documentTypes: [Blog, Authors, Series],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
