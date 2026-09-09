@@ -88,8 +88,9 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
     ? allCoreContent(sortPostsBySeriesOrder(allBlogs.filter((blog) => blog.series === post.series)))
     : []
   const seriesIndex = seriesPosts.findIndex((blog) => blog.slug === slug)
-  const prev = seriesPosts[seriesIndex + 1]
-  const next = seriesPosts[seriesIndex - 1]
+  // sortPostsBySeriesOrder is ascending, so the earlier post in the series sits at seriesIndex - 1
+  const prev = seriesPosts[seriesIndex - 1]
+  const next = seriesPosts[seriesIndex + 1]
   const authorList = post?.authors || ['default']
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors.find((p) => p.slug === author)
