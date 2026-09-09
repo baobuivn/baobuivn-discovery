@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { slug } from 'github-slugger'
 
 interface Props {
@@ -7,20 +8,25 @@ interface Props {
 }
 
 const PostTags = ({ tags }: Props) => {
+  const router = useRouter()
+
   if (!tags || tags.length === 0) {
     return null
   }
 
-  const handleTagClick = (tag: string, e: React.MouseEvent) => {
+  const goToTag = (tag: string) => router.push(`/tags/${slug(tag)}`)
+
+  const handleClick = (tag: string, e: React.MouseEvent) => {
+    e.preventDefault()
     e.stopPropagation() // Ngăn sự kiện lan lên link cha
-    window.location.href = `/tags/${encodeURIComponent(slug(tag))}`
+    goToTag(tag)
   }
 
   const handleKeyDown = (tag: string, e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
       e.stopPropagation()
-      window.location.href = `/tags/${encodeURIComponent(slug(tag))}`
+      goToTag(tag)
     }
   }
 
@@ -29,7 +35,8 @@ const PostTags = ({ tags }: Props) => {
       {tags.map((tag) => (
         <button
           key={tag}
-          onClick={(e) => handleTagClick(tag, e)}
+          type="button"
+          onClick={(e) => handleClick(tag, e)}
           onKeyDown={(e) => handleKeyDown(tag, e)}
           role="link"
           tabIndex={0}
