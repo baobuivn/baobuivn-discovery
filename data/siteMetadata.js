@@ -1,8 +1,8 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Ghi chép của Bảo Bùi',
+  title: 'Dịch Nhân Ký',
   author: 'Bảo Bùi',
-  headerTitle: 'Quá trình khám phá tri thức của Bảo Bùi',
+  headerTitle: 'Dịch Nhân Ký',
   description:
     'Tôi tò mò vũ trụ được vận hành ra sao, tôi muốn học hỏi và chia sẻ những gì tôi biết',
   language: 'en-us',
