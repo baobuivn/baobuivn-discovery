@@ -5,6 +5,7 @@ import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
 
 const MAX_DISPLAY = 5
+const MAX_TAGS = 3
 
 export default function Home({ posts, series }) {
   const sortedSeries = [...series].sort((a, b) => a.order - b.order)
@@ -82,7 +83,7 @@ export default function Home({ posts, series }) {
                         </Link>
                       </h2>
                       <div className="relative z-10 mt-3 flex flex-wrap">
-                        {tags.map((tag) => (
+                        {tags.slice(0, MAX_TAGS).map((tag) => (
                           <Tag key={tag} text={tag} />
                         ))}
                       </div>
