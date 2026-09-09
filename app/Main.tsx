@@ -1,8 +1,8 @@
 import Link from '@/components/Link'
+import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
-import PostTags from '@/components/PostTags' // Import the new client component
 
 const MAX_DISPLAY = 5
 
@@ -65,32 +65,36 @@ export default function Home({ posts, series }) {
               const { slug, date, title, summary, tags } = post
               return (
                 <li key={slug} className="flex flex-col">
-                  <article className="flex h-full flex-col">
-                    <Link
-                      href={`/blog/${slug}`}
-                      className="hover:border-primary-400 dark:hover:border-primary-500 flex h-full flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md dark:border-gray-700 dark:bg-gray-900"
-                    >
-                      <dl>
-                        <dt className="sr-only">Published on</dt>
-                        <dd className="text-sm leading-6 font-medium text-gray-500 dark:text-gray-400">
-                          <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                        </dd>
-                      </dl>
-                      <div className="mt-4 flex flex-1 flex-col">
-                        <h2 className="hover:text-primary-500 dark:hover:text-primary-400 text-xl leading-7 font-bold tracking-tight text-gray-900 dark:text-gray-100">
+                  <article className="hover:border-primary-400 dark:hover:border-primary-500 relative flex h-full flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md dark:border-gray-700 dark:bg-gray-900">
+                    <dl>
+                      <dt className="sr-only">Published on</dt>
+                      <dd className="text-sm leading-6 font-medium text-gray-500 dark:text-gray-400">
+                        <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                      </dd>
+                    </dl>
+                    <div className="mt-4 flex flex-1 flex-col">
+                      <h2 className="text-xl leading-7 font-bold tracking-tight text-gray-900 dark:text-gray-100">
+                        <Link
+                          href={`/blog/${slug}`}
+                          className="hover:text-primary-500 dark:hover:text-primary-400 after:absolute after:inset-0"
+                        >
                           {title}
-                        </h2>
-                        <PostTags tags={tags} />
-                        <div className="prose mt-4 line-clamp-4 max-w-none overflow-hidden text-sm text-gray-500 dark:text-gray-400">
-                          {summary}
-                        </div>
+                        </Link>
+                      </h2>
+                      <div className="relative z-10 mt-3 flex flex-wrap">
+                        {tags.map((tag) => (
+                          <Tag key={tag} text={tag} />
+                        ))}
                       </div>
-                      <div className="mt-auto pt-5 text-sm leading-6 font-medium">
-                        <span className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          Đọc bài này &rarr;
-                        </span>
+                      <div className="prose mt-4 line-clamp-4 max-w-none overflow-hidden text-sm text-gray-500 dark:text-gray-400">
+                        {summary}
                       </div>
-                    </Link>
+                    </div>
+                    <div className="mt-auto pt-5 text-sm leading-6 font-medium">
+                      <span className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                        Đọc bài này &rarr;
+                      </span>
+                    </div>
                   </article>
                 </li>
               )
