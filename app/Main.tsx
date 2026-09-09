@@ -1,8 +1,8 @@
 import Link from '@/components/Link'
-import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
+import PostTags from '@/components/PostTags' // Import the new client component
 
 const MAX_DISPLAY = 5
 
@@ -80,11 +80,7 @@ export default function Home({ posts, series }) {
                         <h2 className="hover:text-primary-500 dark:hover:text-primary-400 text-xl leading-7 font-bold tracking-tight text-gray-900 dark:text-gray-100">
                           {title}
                         </h2>
-                        <div className="mt-3 flex flex-wrap">
-                          {tags.map((tag) => (
-                            <Tag key={tag} text={tag} />
-                          ))}
-                        </div>
+                        <PostTags tags={tags} />
                         <div className="prose mt-4 line-clamp-4 max-w-none overflow-hidden text-sm text-gray-500 dark:text-gray-400">
                           {summary}
                         </div>
