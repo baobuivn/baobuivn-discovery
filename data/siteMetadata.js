@@ -1,4 +1,14 @@
-/** @type {import("pliny/config").PlinyConfig } */
+/**
+ * pliny has no Waline provider, so `comments` is widened here to let
+ * components/Comments.tsx read `walineConfig` without a cast.
+ *
+ * @type {Omit<import("pliny/config").PlinyConfig, 'comments'> & {
+ *   comments?: import("pliny/comments").CommentsConfig | {
+ *     provider: 'waline',
+ *     walineConfig: Omit<import('@waline/client').WalineInitOptions, 'el'>
+ *   }
+ * }}
+ */
 const siteMetadata = {
   title: 'Dịch Nhân Ký',
   author: 'Bảo Bùi',
@@ -54,7 +64,15 @@ const siteMetadata = {
     // content security policy in the `next.config.js` file.
     // Select a provider and use the environment variables associated to it
     // https://vercel.com/docs/environment-variables
-    provider: 'giscus', // supported providers: giscus, utterances, disqus
+    provider: 'waline', // supported providers: waline, giscus, utterances, disqus
+    // https://waline.js.org/en/reference/client.html
+    walineConfig: {
+      serverURL:
+        process.env.NEXT_PUBLIC_WALINE_SERVER_URL || 'https://waline-blog-comment-seven.vercel.app',
+      lang: 'vi',
+      // next-themes puts a `dark` class on <html> (see app/theme-providers.tsx)
+      dark: 'html.dark',
+    },
     giscusConfig: {
       // Visit the link below, and follow the steps in the 'configuration' section
       // https://giscus.app/
