@@ -14,7 +14,7 @@ const siteMetadata = {
   author: 'Bảo Bùi',
   headerTitle: 'Dịch Nhân Ký',
   description:
-    'Tôi tò mò vũ trụ được vận hành ra sao, tôi muốn học hỏi và chia sẻ những gì tôi biết',
+    'Tôi tò mò vũ trụ được vận hành ra sao, tôi muốn học hỏi và chia sẻ những gì tôi biết.\nCảm ơn bạn vì đã xuất hiện ở đây - Xin lỗi bạn nếu những gì bạn thấy, những gì tôi viết tạo ra cảm giác khó chịu trong bạn, hãy tha thứ cho tôi. Thương lắm',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://baobuivn-discovery.vercel.app/',

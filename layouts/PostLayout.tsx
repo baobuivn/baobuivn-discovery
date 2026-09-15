@@ -103,8 +103,8 @@ export default function PostLayout({
                 </dd>
               </dl>
               {toc && toc.length > 0 && (
-                <aside className="sticky hidden xl:top-6 xl:block xl:self-start">
-                  <ArticleTOC toc={toc} sticky />
+                <aside className="sticky hidden xl:top-6 xl:block xl:self-start xl:max-h-[calc(100vh-3rem)] xl:overflow-y-auto">
+                  <ArticleTOC toc={toc} />
                 </aside>
               )}
               <footer className="order-2">

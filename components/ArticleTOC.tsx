@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export interface ArticleTOCItem {
   value: string
@@ -11,7 +11,6 @@ export interface ArticleTOCItem {
 
 interface ArticleTOCProps {
   toc: { value: string; url: string; depth: number }[]
-  sticky?: boolean
 }
 
 function createNestedItems(items: ArticleTOCProps['toc']) {
@@ -75,9 +74,10 @@ function TOCList({
   )
 }
 
-export default function ArticleTOC({ toc, sticky = false }: ArticleTOCProps) {
+export default function ArticleTOC({ toc }: ArticleTOCProps) {
   const items = createNestedItems(toc)
   const [activeUrl, setActiveUrl] = useState(items[0]?.url || '')
+  const listRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const updateActiveHeading = () => {
@@ -109,6 +109,12 @@ export default function ArticleTOC({ toc, sticky = false }: ArticleTOCProps) {
     }
   }, [items])
 
+  useEffect(() => {
+    if (!activeUrl || !listRef.current) return
+    const activeLink = listRef.current.querySelector(`a[href="${activeUrl}"]`)
+    activeLink?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+  }, [activeUrl])
+
   if (items.length === 0) {
     return null
   }
@@ -124,11 +130,8 @@ export default function ArticleTOC({ toc, sticky = false }: ArticleTOCProps) {
 
   return (
     <div
-      className={
-        sticky
-          ? 'max-h-[calc(100vh-3rem)] overflow-y-auto rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 dark:border-gray-700 dark:bg-gray-800/50'
-          : 'my-8 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 dark:border-gray-700 dark:bg-gray-800/50'
-      }
+      ref={listRef}
+      className="my-8 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 dark:border-gray-700 dark:bg-gray-800/50"
     >
       <h2 className="mb-3 text-sm font-semibold tracking-wide text-gray-900 dark:text-gray-100">
         Mục lục
